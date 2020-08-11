@@ -1,10 +1,11 @@
+using Consumption.EFCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Study.EFCore;
+using Study.EFCore.Context;
 using System;
 using System.IO;
 
@@ -21,20 +22,17 @@ namespace Study.Api
             Configuration = configuration;
         }
 
-
         /// <summary>
         /// 
         /// </summary>
         public IConfiguration Configuration { get; }
-
 
         /// <summary>
         /// 配置服务 使用此方法将服务添加到容器中。
         /// </summary>
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
-        {
-            //services.AddControllers();
+        {        
             services.AddCors(options =>
             {
                 options.AddPolicy("any", builder =>
@@ -43,6 +41,7 @@ namespace Study.Api
                 });
             });
             services.AddControllers();
+
             services.AddHsts(options =>
             {
                 options.Preload = true;
@@ -60,7 +59,8 @@ namespace Study.Api
                 var connectionString = Configuration.GetConnectionString("MySqlNoteConnection");
                 options.UseMySQL(connectionString);
             });
-            //.AddUnitOfWork<ConsumptionContext>()
+            services.AddUnitOfWork<ConsumptionContext>();
+
             //.AddCustomRepository<User, CustomUserRepository>()
             //.AddCustomRepository<UserLog, CustomUserLogRepository>()
             //.AddCustomRepository<Menu, CustomMenuRepository>()
@@ -70,15 +70,16 @@ namespace Study.Api
 
             services.AddSwaggerGen(options =>
             {
-                options.IncludeXmlComments(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NoteApi.xml"));
+                var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "StudyApi.xml");
+                options.IncludeXmlComments(path);
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo()
                 {
-                    Title = "Note Service API",
-                    Version = "v1",
+                    Title = "Study Service API",
+                    //Version = "v1",
                     Contact = new Microsoft.OpenApi.Models.OpenApiContact()
                     {
-                        Name = "WPF-Xamarin-Blazor-Examples",
-                        Url = new Uri("https://github.com/HenJigg/WPF-Xamarin-Blazor-Examples")
+                        Name = "Study-WEB-API",
+                        //Url = new Uri("https://github.com/HenJigg/WPF-Xamarin-Blazor-Examples")
                     }
                 });
             });
@@ -105,6 +106,13 @@ namespace Study.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+         
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.ShowExtensions();
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "StudyAPI");
             });
         }
     }

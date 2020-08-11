@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NLog.Web;
+using Study.EFCore.Context;
 using System;
 
 namespace Study.Api
@@ -10,7 +11,7 @@ namespace Study.Api
     public class Program
     {
         /// <summary>
-        /// 
+        /// WEB API服务入口
         /// </summary>
         /// <param name="args"></param>
         public static void Main(string[] args)
@@ -23,8 +24,8 @@ namespace Study.Api
                 using (var scope = host.Services.CreateScope())
                 {
                     var serivces = scope.ServiceProvider;
-                    //var context = serivces.GetRequiredService<ConsumptionContext>();
-                    //ConsumptionHelper.InitSampleDataAsync(context).Wait();
+                    var context = serivces.GetRequiredService<ConsumptionContext>();
+                    ConsumptionHelper.InitSampleDataAsync(context).Wait();
                 }
                 host.Run();
             }
@@ -47,7 +48,7 @@ namespace Study.Api
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
-                {               
+                {
                     webBuilder.UseStartup<Startup>()
                      .ConfigureLogging(logging =>
                      {
