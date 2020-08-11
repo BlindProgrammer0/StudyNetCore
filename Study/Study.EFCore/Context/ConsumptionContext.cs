@@ -2,7 +2,7 @@
 using Study.Core.Entity;
 using System;
 
-namespace Study.EFCore
+namespace Study.EFCore.Context
 {
     public class ConsumptionContext : DbContext
     {
