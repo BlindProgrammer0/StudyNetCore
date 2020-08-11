@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Study.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Study.Api.Controllers.BaseController`1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Study.Api.Controllers.BaseController`1.#ctor(Microsoft.Extensions.Logging.ILogger{`0},Consumption.EFCore.IUnitOfWork)">
+            <summary>
+            
+            </summary>
+            <param name="logger"></param>
+            <param name="work"></param>
+        </member>
+        <member name="T:Study.Api.Controllers.UserController">
+            <summary>
+            用户数据控制器
+            </summary>   
+        </member>
+        <member name="M:Study.Api.Controllers.UserController.#ctor(Microsoft.Extensions.Logging.ILogger{Study.Api.Controllers.UserController},Consumption.EFCore.IUnitOfWork)">
+            <summary>
+            
+            </summary>
+            <param name="logger"></param>
+            <param name="work"></param>
+        </member>
+        <member name="M:Study.Api.Controllers.UserController.Login(System.String,System.String)">
+            <summary>
+            用户登录
+            </summary>
+            <param name="account">账号</param>
+            <param name="passWord">密码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Study.Api.Controllers.UserController.GetUser(System.Int32)">
+            <summary>
+            获取用户数据信息
+            </summary>
+            <param name="id">用户ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Study.Api.Controllers.UserController.GetUsers(Consumption.Core.Query.UserParameters)">
+            <summary>
+            获取用户数据列表信息
+            </summary>
+            <param name="parameters">请求参数</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Study.Api.Controllers.UserController.AddUser(Study.Core.Entity.User)">
+            <summary>
+            新增用户
+            </summary>
+            <param name="user">用户信息</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Study.Api.Controllers.UserController.SaveUser(Study.Core.Entity.User)">
+            <summary>
+            保存用户信息
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Study.Api.Controllers.UserController.DeleteUser(System.Int32)">
+            <summary>
+            删除用户
+            </summary>
+            <param name="id">用户ID</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Study.Api.Program.Main(System.String[])">
+            <summary>
+            WEB API服务入口
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:Study.Api.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            创建主机构建器
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Study.Api.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:Study.Api.Startup.Configuration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Study.Api.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            配置服务 使用此方法将服务添加到容器中。
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:Study.Api.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            此方法由运行时调用。使用此方法配置HTTP请求管道。
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+    </members>
+</doc>
