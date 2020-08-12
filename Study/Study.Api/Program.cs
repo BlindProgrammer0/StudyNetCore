@@ -15,7 +15,7 @@ namespace Study.Api
         /// </summary>
         /// <param name="args"></param>
         public static void Main(string[] args)
-        {
+        {           
             var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
             try
             {
@@ -51,7 +51,7 @@ namespace Study.Api
                 {
                     webBuilder.UseStartup<Startup>()
                      .ConfigureLogging(logging =>
-                     {
+                     {                        
                          logging.ClearProviders();
                          logging.SetMinimumLevel(LogLevel.Trace);
                      }).UseNLog().UseUrls("http://*:5001");
