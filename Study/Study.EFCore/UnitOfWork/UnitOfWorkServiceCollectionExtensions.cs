@@ -6,25 +6,25 @@ namespace Consumption.EFCore
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
-    /// Extension methods for setting up unit of work related services in an <see cref="IServiceCollection"/>.
+    /// 用于设置与工作相关的服务单元的扩展方法  <see cref="IServiceCollection"/>.
     /// </summary>
     public static class UnitOfWorkServiceCollectionExtensions
     {
         /// <summary>
-        /// Registers the unit of work given context as a service in the <see cref="IServiceCollection"/>.
+        /// 将给定上下文的工作单元注册为服务 in the <see cref="IServiceCollection"/>.
         /// </summary>
-        /// <typeparam name="TContext">The type of the db context.</typeparam>
+        /// <typeparam name="TContext">数据库上下文的类型.</typeparam>
         /// <param name="services">The <see cref="IServiceCollection"/> to add services to.</param>
-        /// <returns>The same service collection so that multiple calls can be chained.</returns>
+        /// <returns>相同的服务集合，以便可以链接多个调用。</returns>
         /// <remarks>
-        /// This method only support one db context, if been called more than once, will throw exception.
+        /// 此方法只支持一个db上下文，如果调用多次，将抛出异常。
         /// </remarks>
         public static IServiceCollection AddUnitOfWork<TContext>(this IServiceCollection services) where TContext : DbContext
         {
             services.AddScoped<IRepositoryFactory, UnitOfWork<TContext>>();
-            // Following has a issue: IUnitOfWork cannot support multiple dbcontext/database, 
-            // that means cannot call AddUnitOfWork<TContext> multiple times.
-            // Solution: check IUnitOfWork whether or null
+            // 下面有一个问题:IUnitOfWork不能支持多个dbcontext/数据库， 
+            // 这意味着不能多次调用AddUnitOfWork。
+            // 解决方案:检查IUnitOfWork是否为空
             services.AddScoped<IUnitOfWork, UnitOfWork<TContext>>();
             services.AddScoped<IUnitOfWork<TContext>, UnitOfWork<TContext>>();
 
@@ -32,14 +32,14 @@ namespace Consumption.EFCore
         }
 
         /// <summary>
-        /// Registers the unit of work given context as a service in the <see cref="IServiceCollection"/>.
+        /// 将给定上下文的工作单元注册为服务 in the <see cref="IServiceCollection"/>.
         /// </summary>
-        /// <typeparam name="TContext1">The type of the db context.</typeparam>
-        /// <typeparam name="TContext2">The type of the db context.</typeparam>
+        /// <typeparam name="TContext1">数据库上下文的类型。</typeparam>
+        /// <typeparam name="TContext2">数据库上下文的类型。</typeparam>
         /// <param name="services">The <see cref="IServiceCollection"/> to add services to.</param>
-        /// <returns>The same service collection so that multiple calls can be chained.</returns>
+        /// <returns>相同的服务集合，以便可以链接多个调用。</returns>
         /// <remarks>
-        /// This method only support one db context, if been called more than once, will throw exception.
+        /// 此方法只支持一个db上下文，如果调用多次，将抛出异常。
         /// </remarks>
         public static IServiceCollection AddUnitOfWork<TContext1, TContext2>(this IServiceCollection services)
             where TContext1 : DbContext
